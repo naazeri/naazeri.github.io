@@ -12,7 +12,7 @@ const BlogList = () => {
         setPosts(
           await Promise.all(
             POSTS_LIST.map(async (post) => {
-              const response = await fetch(`/posts/${post}/content.md`);
+              const response = await fetch(`/posts/${post}/content.txt`);
               const text = await response.text();
               const { data } = matter(text);
               return { ...data, slug: post };

@@ -18,7 +18,7 @@ const BlogPostPage = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`/posts/${slug}/content.md`);
+        const response = await fetch(`/posts/${slug}/content.txt`);
         const text = await response.text();
         const { data, content } = matter(text);
         setPost(data);
