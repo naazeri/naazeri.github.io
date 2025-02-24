@@ -1,15 +1,15 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import BlogPost from './components/BlogPost';
-import BlogPage from './pages/BlogPage';
+import BlogPostPage from './pages/BlogPostPage';
+import BlogPostsPage from './pages/BlogPostsPage';
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route index path="/" element={<HomePage />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/blog" element={<BlogPostsPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
       </Routes>
     </BrowserRouter>
   );
