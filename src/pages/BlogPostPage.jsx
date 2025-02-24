@@ -7,22 +7,24 @@ import matter from 'gray-matter';
 import { useState, useEffect } from 'react';
 import { Buffer } from 'buffer';
 import useAppStore from '../store/useAppStore';
+import { POSTS_LIST } from '../utils/constants';
 window.Buffer = Buffer;
 
 const BlogPostPage = () => {
   const { slug } = useParams();
   const { setLang } = useAppStore();
-  const [post, setPost] = useState(null);
-  const [content, setContent] = useState('');
+  const [postContent, setPostContent] = useState('');
+
+  // Find the post based on the slug
+  const post = POSTS_LIST.find((post) => post.slug === slug);
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const response = await fetch(`/posts/${slug}/content.txt`);
         const text = await response.text();
-        const { data, content } = matter(text);
-        setPost(data);
-        setContent(content);
+        const { content } = matter(text);
+        setPostContent(content);
       } catch (error) {
         console.error('Error loading post:', error);
       }
@@ -43,7 +45,7 @@ const BlogPostPage = () => {
         <>
           <h1 className="text-3xl font-bold">{post.title}</h1>
           <img
-            src={`/posts/${slug}/${post.image}`}
+            src={`/posts/${slug}/cover.webp`}
             alt={post.title}
             className="w-full my-4"
           />
@@ -52,7 +54,6 @@ const BlogPostPage = () => {
             remarkPlugins={[remarkGfm]}
             components={{
               code({ inline, children, className }) {
-                console.log('🚀 ~ code ~ inline:', inline);
                 return !inline ? (
                   <SyntaxHighlighter
                     dir="ltr"
@@ -88,7 +89,7 @@ const BlogPostPage = () => {
               },
             }}
           >
-            {content}
+            {postContent}
           </ReactMarkdown>
 
           <hr className="my-4" />

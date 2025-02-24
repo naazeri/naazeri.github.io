@@ -42,7 +42,7 @@ const BlogList = () => {
             <div className="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-200">
               {/* Post image */}
               <img
-                src={`/posts/${post.slug}/${post.image}`}
+                src={`/posts/${post.slug}/cover.webp`}
                 alt={post.title}
                 className="w-full h-48 object-cover"
               />
