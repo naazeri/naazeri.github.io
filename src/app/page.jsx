@@ -1,6 +1,6 @@
 'use client';
 
-import { portfolioData } from '@/lib/constants';
+import { siteData } from '@/lib/constants';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -81,7 +81,10 @@ export default function Home() {
 
         <main className="main">
           {/* Hero Section */}
-          <section id="hero" className="hero section dark-background">
+          <section
+            id={siteData.heroData.anchorId}
+            className="hero section dark-background"
+          >
             <img src="assets/img/background.webp" alt="" data-aos="fade-in" />
 
             <div
@@ -89,8 +92,8 @@ export default function Home() {
               data-aos="fade-up"
               data-aos-delay="100"
             >
-              <h2>رضا ناظری</h2>
-              <p>برنامه نویس سایت و اپلیکیشن</p>
+              <h2>{siteData.heroData.title}</h2>
+              <p>{siteData.heroData.subtitle}</p>
               <a href="#about" className="btn-scroll" title="Scroll Down">
                 <i className="bi bi-chevron-down"></i>
               </a>
@@ -99,17 +102,25 @@ export default function Home() {
           {/* /Hero Section */}
 
           {/* About Section */}
-          <section id="about" className="about section">
+          <section id={siteData.aboutData.anchorId} className="about section">
             {/* Section Title */}
             <div className="container section-title" data-aos="fade-up">
-              <span className="description-title">درباره من</span>
-              <h2>درباره من</h2>
-              <p></p>
+              <span className="description-title">
+                {siteData.aboutData.title1}
+              </span>
+              <h2>{siteData.aboutData.title1}</h2>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: siteData.aboutData.subtitle1,
+                }}
+              ></p>
             </div>
             {/* End Section Title */}
 
+            {/* About Content */}
             <div className="container" data-aos="fade-up" data-aos-delay="100">
               <div className="row gy-4 justify-content-center">
+                {/* about image */}
                 <div className="col-lg-4">
                   <img
                     src="assets/img/reza-nazeri.webp"
@@ -117,86 +128,47 @@ export default function Home() {
                     alt=""
                   />
                 </div>
+
+                {/* about text */}
                 <div className="col-lg-8 content">
-                  <h2>مهندس نرم افزار</h2>
-                  <p className="fst-italic py-3">
-                    طراحی حرفه‌ای، کد تمیز، نتیجه‌ای که عاشقش خواهید شد!
-                  </p>
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <ul>
-                        <li>
-                          <i className="bi bi-chevron-left"></i>
-                          <strong className="mx-1">تلفن:</strong>
-                          <span dir="ltr">+98 915 814 0062</span>
-                        </li>
-                        <li>
-                          <i className="bi bi-chevron-left"></i>
-                          <strong className="mx-1">گیتهاب:</strong>
-                          <span>
-                            <a href="https://github.com/naazeri">مشاهده</a>
-                          </span>
-                          <i className="bi bi-link mx-1"></i>
-                        </li>
-                        <li>
-                          <i className="bi bi-chevron-left"></i>
-                          <strong className="mx-1">تلگرام:</strong>
-                          <span>
-                            <a href="https://t.me/PyReza">مشاهده</a>
-                          </span>
-                          <i className="bi bi-box-arrow-up-right mx-1"></i>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="col-lg-6">
-                      <ul>
-                        <li>
-                          <i className="bi bi-chevron-left"></i>
-                          <strong className="mx-1">ایمیل:</strong>
-                          <span>
-                            <a
-                              href="mailto:reza.nazeri.dev@gmail.com"
-                              target="_blank"
-                            >
-                              reza.nazeri.dev@gmail.com
-                            </a>
-                          </span>
-                        </li>
-                        <li>
-                          <i className="bi bi-chevron-left"></i>
-                          <strong className="mx-1">لینکدین:</strong>
-                          <span>
-                            <a
-                              href="https://www.linkedin.com/in/rezanazeri"
-                              target="_blank"
-                            >
-                              مشاهده
-                            </a>
-                            <i className="bi bi-box-arrow-up-right mx-0"></i>
-                          </span>
-                        </li>
-                        <li>
-                          <i className="bi bi-chevron-left"></i>
-                          <strong className="mx-1">اینستاگرام:</strong>
-                          <span>
-                            <a
-                              href="https://instagram.com/re_nazeri"
-                              target="_blank"
-                            >
-                              مشاهده
-                            </a>
-                            <i className="bi bi-box-arrow-up-right mx-0"></i>
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
+                  <h2>{siteData.aboutData.title2}</h2>
+                  <p
+                    className="py-2 my-0"
+                    dangerouslySetInnerHTML={{
+                      __html: siteData.aboutData.subtitle2,
+                    }}
+                  ></p>
+
+                  {/* about socials */}
+                  <div className="row my-4">
+                    {siteData.aboutData.socials.map((social, index) => (
+                      <div
+                        key={index}
+                        className="col-lg-6 d-flex align-items-center about-social-item"
+                      >
+                        <i
+                          className={`about-head-icon bi bi-${social.headIcon}`}
+                        ></i>
+                        <strong className="mx-2">{social.label}:</strong>
+                        <a href={social.href}>
+                          {social.text}
+                          <i
+                            className={`about-tail-icon mx-1 bi bi-${
+                              social.tailIcon || 'box-arrow-up-left'
+                            }`}
+                          ></i>
+                        </a>
+                      </div>
+                    ))}
                   </div>
-                  {/* description */}
-                  <p className="py-0 my-0">من رضا ناظری هستم.</p>
-                  <p className="py-0 my-0">
-                    یک مهندس نرم‌افزار و توسعه‌دهنده وب با بیش از 10 سال تجربه
-                    در ساخت وب‌سایت‌های مدرن، کاربرپسند و مقیاس‌پذیر.
-                  </p>
+
+                  {/* about end description */}
+                  <p
+                    className="py-0 my-0"
+                    dangerouslySetInnerHTML={{
+                      __html: siteData.aboutData.description,
+                    }}
+                  ></p>
                   {/* <p className="pb-3 my-0">
                 اگر به دنبال یک راه‌حل خلاقانه و کارآمد برای پروژه‌های وب خود
                 هستید، خوشحال می‌شوم که همکاری کنیم!
@@ -208,97 +180,67 @@ export default function Home() {
           {/* /About Section */}
 
           {/* Services Section */}
-          <section id="services" className="services section">
-            {/* Section Title */}
+          <section
+            id={siteData.serviceData.anchorId}
+            className="services section"
+          >
+            {/* Titles */}
             <div className="container section-title" data-aos="fade-up">
-              <span className="description-title">سرویس ها</span>
-              <h2>سرویس ها</h2>
-              {/* subtitle */}
-              <p></p>
-            </div>
-            {/* End Section Title */}
+              {/* title */}
+              <span className="description-title">
+                {siteData.serviceData.title}
+              </span>
+              <h2>{siteData.serviceData.title}</h2>
 
+              {/* subtitle */}
+              <p>{siteData.serviceData.subtitle}</p>
+            </div>
+
+            {/* service cards */}
             <div className="container">
               <div className="row gy-4">
-                <div className="col-xl-3 col-md-6 d-flex">
-                  <div className="service-item position-relative">
-                    <div className="icon">
-                      <i className="bi bi-bounding-box-circles icon"></i>
+                {/* Service card item */}
+                {siteData.serviceData.services.map((service, index) => (
+                  <div
+                    key={index}
+                    className="col-xl-3 col-md-6 d-flex"
+                    data-aos="none"
+                    data-aos-delay={200 + index * 100}
+                  >
+                    <div className="service-item position-relative">
+                      <div className="icon">
+                        <i className={`icon bi bi-${service.icon}`}></i>
+                      </div>
+                      <h4>
+                        <a href="" className="stretched-link">
+                          {service.title}
+                        </a>
+                      </h4>
+                      <p>{service.description}</p>
                     </div>
-                    <h4>
-                      <a href="" className="stretched-link">
-                        وب‌سایت‌های سفارشی
-                      </a>
-                    </h4>
-                    <p>
-                      توسعه وب‌سایت‌های سفارشی. از طراحی تا پیاده‌سازی به طور
-                      کامل
-                    </p>
                   </div>
-                </div>
-                {/* End Service Item */}
-
-                <div className="col-xl-3 col-md-6 d-flex">
-                  <div className="service-item position-relative">
-                    <div className="icon">
-                      <i className="bi bi-activity icon"></i>
-                    </div>
-                    <h4>
-                      <a href="" className="stretched-link">
-                        بهینه سازی
-                      </a>
-                    </h4>
-                    <p>بهینه‌سازی عملکرد و افزایش سرعت سایت</p>
-                  </div>
-                </div>
-                {/* End Service Item */}
-
-                <div className="col-xl-3 col-md-6 d-flex">
-                  <div className="service-item position-relative">
-                    <div className="icon">
-                      <i className="bi bi-phone icon"></i>
-                    </div>
-                    <h4>
-                      <a href="" className="stretched-link">
-                        وب اپلیکیشن
-                      </a>
-                    </h4>
-                    <p>ساخت وب‌اپلیکیشن‌های واکنش‌گرا و موبایل محور</p>
-                  </div>
-                </div>
-                {/* End Service Item */}
-
-                <div className="col-xl-3 col-md-6 d-flex">
-                  <div className="service-item position-relative">
-                    <div className="icon">
-                      <i className="bi bi-database icon"></i>
-                    </div>
-                    <h4>
-                      <a href="" className="stretched-link">
-                        API
-                      </a>
-                    </h4>
-                    <p>
-                      توسعه بک‌اند و سرویس‌های API. طراحی و مدیریت پایگاه داده
-                    </p>
-                  </div>
-                </div>
-                {/* End Service Item */}
+                ))}
               </div>
             </div>
           </section>
           {/* /Services Section */}
 
           {/* Portfolio Section */}
-          <section id="portfolio" className="portfolio section">
-            {/* Section Title */}
+          <section
+            id={siteData.portfolioData.anchorId}
+            className="portfolio section"
+          >
+            {/* Titles */}
             <div className="container section-title" data-aos="fade-up">
-              <span className="description-title">نمونه کارها</span>
-              <h2>نمونه کارها</h2>
+              {/* title */}
+              <span className="description-title">
+                {siteData.portfolioData.title}
+              </span>
+              <h2>{siteData.portfolioData.title}</h2>
+
               {/* subtitle */}
-              <p></p>
+              <p>{siteData.portfolioData.subtitle}</p>
             </div>
-            {/* End Section Title */}
 
             <div className="container-fluid">
               <div
@@ -316,7 +258,7 @@ export default function Home() {
                   <li data-filter="*" className="filter-active">
                     همه
                   </li>
-                  {portfolioData.categories.map((category) => (
+                  {siteData.portfolioData.categories.map((category) => (
                     <li
                       key={category.id}
                       data-filter={`.filter-${category.id}`}
@@ -338,12 +280,14 @@ export default function Home() {
                   data-aos-delay="200"
                 >
                   {/* Portfolio Item */}
-                  {portfolioData.projects
+                  {siteData.portfolioData.projects
                     .sort((a, b) => a.order - b.order)
                     .map((project) => (
                       <div
                         key={project.id}
-                        className={`col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-${project.category}`}
+                        className={`col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item ${project.categories
+                          .map((category) => `filter-${category}`)
+                          .join(' ')}`}
                       >
                         <Link
                           href={`/project/${project.id}`}

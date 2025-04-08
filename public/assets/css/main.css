@@ -814,22 +814,23 @@ section,
   font-size: 24px;
 }
 
-.about .content ul {
-  list-style: none;
-  padding: 0;
-}
-
-.about .content ul li {
+.about-social-item {
   margin-bottom: 20px;
   display: flex;
   align-items: center;
 }
 
-.about .content ul strong {
+.about-social-item-lable {
   margin-right: 10px;
 }
 
-.about .content ul i {
+.about-head-icon {
+  font-size: 18px;
+  margin-right: 5px;
+  line-height: 0;
+}
+
+.about-tail-icon {
   font-size: 16px;
   margin-right: 5px;
   color: var(--accent-color);
