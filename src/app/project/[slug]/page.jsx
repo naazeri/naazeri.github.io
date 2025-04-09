@@ -1,15 +1,114 @@
+import { siteData } from '@/lib/constants';
+import Breadcrumbs from '@/components/Breadcrumbs';
+
 export async function generateStaticParams() {
-  // Replace with your logic to fetch possible slugs
-  const slugs = ['1', '2', '3']; // Example
-  return slugs.map((slug) => ({ slug }));
+  return siteData.portfolioData.projects.map((item) => ({
+    slug: item.id.toString(),
+  }));
 }
 
 export default async function Page({ params }) {
   const { slug } = await params;
+  const project = siteData.portfolioData.projects.find(
+    (item) => item.id === parseInt(slug)
+  );
+  const categories = project.categories
+    ?.map(
+      (catId) =>
+        siteData.portfolioData.categories.find((cat) => cat.id === catId)?.label
+    )
+    .join(' - ');
 
   return (
     <>
-      <div className="index-page">{slug}</div>
+      {/* Page Title */}
+      <div className="page-title dark-background">
+        <div className="container position-relative">
+          <h1>{project.title}</h1>
+          {categories && <p>{categories}</p>}
+          <Breadcrumbs items={['جزئیات پروژه']} />
+        </div>
+      </div>
+
+      {/* Portfolio Details Section */}
+      <section id="portfolio-details" className="portfolio-details section">
+        <div className="container" data-aos="fade-up" data-aos-delay="100">
+          <div className="row gy-4">
+            <div className="col-lg-8">
+              <div className="portfolio-details-slider swiper init-swiper">
+                <div className="swiper-wrapper align-items-center">
+                  {/* slider images (gallery) */}
+                  {project.gallery.map((image, index) => (
+                    <div className="swiper-slide" key={index}>
+                      <a
+                        href={image}
+                        className="glightbox"
+                        data-gallery="portfolio-gallery"
+                      >
+                        <img
+                          src={image}
+                          alt={`image of ${project.title} project`}
+                          className="swiper-image"
+                        />
+                      </a>
+                    </div>
+                  ))}
+                </div>
+                <div className="swiper-pagination"></div>
+              </div>
+            </div>
+
+            <div className="col-lg-4">
+              <div
+                className="portfolio-info"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                <h3>اطلاعات پروژه</h3>
+                <ul>
+                  {categories && (
+                    <li>
+                      <strong>دسته بندی</strong>: {categories}
+                    </li>
+                  )}
+                  {project.client && (
+                    <li>
+                      <strong>کارفرما</strong>: {project.client}
+                    </li>
+                  )}
+                  {project.date && (
+                    <li>
+                      <strong>تاریخ شروع پروژه</strong>: {project.date}
+                    </li>
+                  )}
+                  {project.url && (
+                    <li>
+                      <strong>آدرس پروژه</strong>:{' '}
+                      <a href={project.url} target="_blank">
+                        مشاهده
+                      </a>
+                    </li>
+                  )}
+                </ul>
+              </div>
+              <div
+                className="portfolio-description"
+                data-aos="fade-up"
+                data-aos-delay="300"
+              >
+                <h2>{project.title}</h2>
+                {project.description && (
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: project.description,
+                    }}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

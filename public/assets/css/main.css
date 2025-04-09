@@ -483,7 +483,7 @@ h6 {
 }
 
 .footer h3 {
-  font-size: 36px;
+  font-size: 26px;
   font-weight: 700;
   position: relative;
   padding: 0;
@@ -491,7 +491,7 @@ h6 {
 }
 
 .footer p {
-  font-size: 15;
+  font-size: 14px;
   font-style: italic;
   padding: 0;
   margin: 0 0 30px 0;
@@ -502,12 +502,12 @@ h6 {
 }
 
 .footer .social-links a {
-  font-size: 16px;
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--accent-color);
-  color: var(--contrast-color);
+  color: var(--surface-color);
   line-height: 1;
   margin: 0 4px;
   border-radius: 50%;
@@ -905,6 +905,7 @@ section,
   padding: 50px 30px;
   transition: all 0.3s ease-in-out;
   height: 100%;
+  width: 100%;
   position: relative;
   z-index: 1;
 }
@@ -1334,6 +1335,11 @@ section,
 /*--------------------------------------------------------------
 # Gallery Section
 --------------------------------------------------------------*/
+.swiper-image {
+  max-height: 500px;
+  object-fit: contain;
+}
+
 .gallery .gallery-item {
   overflow: hidden;
   border-right: 3px solid var(--background-color);

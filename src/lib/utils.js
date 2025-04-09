@@ -1,24 +1,5 @@
-/* eslint-disable no-undef */
-/**
- * Template Name: Laura
- * Template URL: https://bootstrapmade.com/laura-free-creative-bootstrap-theme/
- * Updated: Aug 07 2024 with Bootstrap v5.3.3
- * Author: BootstrapMade.com
- * License: https://bootstrapmade.com/license/
- */
-isMainScriptCalled = false;
-
-// eslint-disable-next-line no-unused-vars
-function mainScript() {
+export function mainScript() {
   'use strict';
-
-  console.log('🚀 ~ mainScript ~ called');
-  if (isMainScriptCalled) {
-    console.log('🚀 ~ mainScript ~ blocked');
-    return;
-  }
-
-  isMainScriptCalled = true;
 
   // Helper function to run a callback if loaded, or attach it to 'load'
   function runOnDocumentLoad(callback) {
@@ -38,14 +19,14 @@ function mainScript() {
     const selectBody = document.querySelector('body');
     const selectHeader = document.querySelector('#header');
     if (
-      !selectHeader.classList.contains('scroll-up-sticky') &&
-      !selectHeader.classList.contains('sticky-top') &&
-      !selectHeader.classList.contains('fixed-top')
+      !selectHeader?.classList.contains('scroll-up-sticky') &&
+      !selectHeader?.classList.contains('sticky-top') &&
+      !selectHeader?.classList.contains('fixed-top')
     )
       return;
     window.scrollY > 100
-      ? selectBody.classList.add('scrolled')
-      : selectBody.classList.remove('scrolled');
+      ? selectBody?.classList.add('scrolled')
+      : selectBody?.classList.remove('scrolled');
   }
 
   document.addEventListener('scroll', toggleScrolled);
@@ -57,11 +38,11 @@ function mainScript() {
   const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
 
   function mobileNavToogle() {
-    document.querySelector('body').classList.toggle('mobile-nav-active');
-    mobileNavToggleBtn.classList.toggle('bi-list');
-    mobileNavToggleBtn.classList.toggle('bi-x');
+    document.querySelector('body')?.classList.toggle('mobile-nav-active');
+    mobileNavToggleBtn?.classList.toggle('bi-list');
+    mobileNavToggleBtn?.classList.toggle('bi-x');
   }
-  mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
+  mobileNavToggleBtn?.addEventListener('click', mobileNavToogle);
 
   /**
    * Hide mobile nav on same-page/hash links
@@ -98,7 +79,7 @@ function mainScript() {
         : scrollTop.classList.remove('active');
     }
   }
-  scrollTop.addEventListener('click', (e) => {
+  scrollTop?.addEventListener('click', (e) => {
     e.preventDefault();
     window.scrollTo({
       top: 0,
@@ -127,14 +108,24 @@ function mainScript() {
    */
   function initSwiper() {
     document.querySelectorAll('.init-swiper').forEach(function (swiperElement) {
-      let config = JSON.parse(
-        swiperElement.querySelector('.swiper-config').innerHTML.trim()
-      );
+      const swiperConfig = {
+        loop: true,
+        speed: 600,
+        autoplay: {
+          delay: 4000,
+        },
+        slidesPerView: 'auto',
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'bullets',
+          clickable: true,
+        },
+      };
 
       if (swiperElement.classList.contains('swiper-tab')) {
-        initSwiperWithCustomPagination(swiperElement, config);
+        initSwiperWithCustomPagination(swiperElement, swiperConfig);
       } else {
-        new Swiper(swiperElement, config);
+        new Swiper(swiperElement, swiperConfig);
       }
     });
   }
@@ -176,8 +167,8 @@ function mainScript() {
           'click',
           function () {
             isotopeItem
-              .querySelector('.isotope-filters .filter-active')
-              .classList.remove('filter-active');
+              ?.querySelector('.isotope-filters .filter-active')
+              ?.classList.remove('filter-active');
             this.classList.add('filter-active');
             initIsotope.arrange({
               filter: this.getAttribute('data-filter'),
@@ -201,7 +192,7 @@ function mainScript() {
           let section = document.querySelector(window.location.hash);
           let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
           window.scrollTo({
-            top: section.offsetTop - parseInt(scrollMarginTop),
+            top: section?.offsetTop - parseInt(scrollMarginTop),
             behavior: 'smooth',
           });
         }, 100);
