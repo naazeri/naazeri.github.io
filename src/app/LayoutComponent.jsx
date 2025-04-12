@@ -29,7 +29,11 @@ export default function LayoutComponent({ children }) {
           <div className="container-fluid position-relative d-flex align-items-center justify-content-between">
             <Link href="/" className="logo d-flex align-items-center">
               {/* Uncomment the line below if you also wish to use an image logo */}
-              <img src="/assets/img/nazeriland-white-circle.png" alt="" />
+              <img
+                src="/assets/img/nazeriland-white.webp"
+                alt="Nazeriland logo"
+                className="site-logo"
+              />
               {/* <h1 className="sitename">Nazeriland</h1> */}
             </Link>
 
