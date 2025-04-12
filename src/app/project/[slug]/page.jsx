@@ -2,10 +2,23 @@ import { siteData } from '@/lib/constants';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import sanitizeHtml from 'sanitize-html';
 
+// Generate static params for static export
 export async function generateStaticParams() {
   return siteData.portfolioData.projects.map((item) => ({
     slug: item.id.toString(),
   }));
+}
+
+// Generate metadata for dynamic title
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const project = siteData.portfolioData.projects.find(
+    (item) => item.id === parseInt(slug)
+  );
+
+  return {
+    title: `جزئیات پروژه ${project?.title}`,
+  };
 }
 
 export default async function Page({ params }) {
