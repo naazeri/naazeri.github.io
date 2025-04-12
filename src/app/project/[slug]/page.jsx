@@ -1,5 +1,6 @@
 import { siteData } from '@/lib/constants';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import sanitizeHtml from 'sanitize-html';
 
 export async function generateStaticParams() {
   return siteData.portfolioData.projects.map((item) => ({
@@ -101,7 +102,7 @@ export default async function Page({ params }) {
                 {project.description && (
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: project.description,
+                      __html: sanitizeHtml(project.description),
                     }}
                   />
                 )}
