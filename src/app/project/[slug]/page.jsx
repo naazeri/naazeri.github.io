@@ -34,10 +34,10 @@ export default async function Page({ params }) {
       <section id="portfolio-details" className="portfolio-details section">
         <div className="container" data-aos="fade-up" data-aos-delay="100">
           <div className="row gy-4">
+            {/* slider images (gallery) */}
             <div className="col-lg-8">
               <div className="portfolio-details-slider swiper init-swiper">
                 <div className="swiper-wrapper align-items-center">
-                  {/* slider images (gallery) */}
                   {project.gallery.map((image, index) => (
                     <div className="swiper-slide" key={index}>
                       <a
@@ -58,6 +58,7 @@ export default async function Page({ params }) {
               </div>
             </div>
 
+            {/* Project Info */}
             <div className="col-lg-4">
               <div
                 className="portfolio-info"
@@ -98,7 +99,7 @@ export default async function Page({ params }) {
               >
                 <h2>{project.title}</h2>
                 {project.description && (
-                  <p
+                  <div
                     dangerouslySetInnerHTML={{
                       __html: project.description,
                     }}
