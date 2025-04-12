@@ -15,9 +15,7 @@
 
 # next.js
 /.next/
-/out/*
-!/out/.nojekyll
-!/out/CNAME
+/out/
 
 # production
 /build
