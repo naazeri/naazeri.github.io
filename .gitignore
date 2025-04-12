@@ -17,6 +17,7 @@
 /.next/
 /out/*
 !/out/.nojekyll
+!/out/CNAME
 
 # production
 /build
