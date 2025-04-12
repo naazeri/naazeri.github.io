@@ -83,7 +83,7 @@ export default function LayoutComponent({ children }) {
               {siteData.aboutData.socials
                 .filter((social) => social.showInFooter)
                 .map((social, index) => (
-                  <a key={index} href={social.href}>
+                  <a key={index} href={social.href} target="_blank">
                     <i className={`bi bi-${social.headIcon}`}></i>
                   </a>
                 ))}

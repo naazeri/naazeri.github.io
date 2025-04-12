@@ -92,7 +92,7 @@ export default function Home() {
                       className={`about-head-icon bi bi-${social.headIcon}`}
                     ></i>
                     <strong className="mx-2">{social.label}:</strong>
-                    <a href={social.href}>
+                    <a href={social.href} target="_blank">
                       {social.text}
                       <i
                         className={`about-tail-icon mx-1 bi bi-${
