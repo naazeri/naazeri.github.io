@@ -176,7 +176,9 @@ h6 {
 }
 
 .header .logo img {
-  max-height: 36px;
+  border-radius: 50%;
+
+  max-height: 45px;
   margin-right: 8px;
 }
 
