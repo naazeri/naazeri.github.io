@@ -45,11 +45,64 @@ export default function Home() {
       </section>
       {/* /Hero Section */}
 
+      {/* Services Section */}
+      <section id={siteData.serviceData.anchorId} className="services section">
+        {/* Titles */}
+        <div className="container section-title" data-aos="fade-up">
+          {/* title */}
+          {siteData.siteConfig.ui.sectionsTitleShadow && (
+            <span className="description-title">
+              {siteData.serviceData.title}
+            </span>
+          )}
+          <h2>{siteData.serviceData.title}</h2>
+
+          {/* subtitle */}
+          <p>{siteData.serviceData.subtitle}</p>
+        </div>
+
+        {/* service cards */}
+        <div className="container">
+          <div className="row gy-4">
+            {/* Service card item */}
+            {siteData.serviceData.services.map((service, index) => (
+              <div
+                key={index}
+                className="col-xl-3 col-md-6 d-flex"
+                data-aos="none"
+                data-aos-delay={200 + index * 100}
+              >
+                <div className="service-item position-relative">
+                  <div className="icon">
+                    <i className={`icon bi bi-${service.icon}`}></i>
+                  </div>
+                  <h4>
+                    {service.href ? (
+                      <Link href={service.href} className="stretched-link">
+                        {service.title}
+                      </Link>
+                    ) : (
+                      service.title
+                    )}
+                  </h4>
+                  <p>{service.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* /Services Section */}
+
       {/* About Section */}
       <section id={siteData.aboutData.anchorId} className="about section">
         {/* Section Title */}
         <div className="container section-title" data-aos="fade-up">
-          <span className="description-title">{siteData.aboutData.title1}</span>
+          {siteData.siteConfig.ui.sectionsTitleShadow && (
+            <span className="description-title">
+              {siteData.aboutData.title1}
+            </span>
+          )}
           <h2>{siteData.aboutData.title1}</h2>
           <p
             dangerouslySetInnerHTML={{
@@ -121,53 +174,6 @@ export default function Home() {
       </section>
       {/* /About Section */}
 
-      {/* Services Section */}
-      <section id={siteData.serviceData.anchorId} className="services section">
-        {/* Titles */}
-        <div className="container section-title" data-aos="fade-up">
-          {/* title */}
-          <span className="description-title">
-            {siteData.serviceData.title}
-          </span>
-          <h2>{siteData.serviceData.title}</h2>
-
-          {/* subtitle */}
-          <p>{siteData.serviceData.subtitle}</p>
-        </div>
-
-        {/* service cards */}
-        <div className="container">
-          <div className="row gy-4">
-            {/* Service card item */}
-            {siteData.serviceData.services.map((service, index) => (
-              <div
-                key={index}
-                className="col-xl-3 col-md-6 d-flex"
-                data-aos="none"
-                data-aos-delay={200 + index * 100}
-              >
-                <div className="service-item position-relative">
-                  <div className="icon">
-                    <i className={`icon bi bi-${service.icon}`}></i>
-                  </div>
-                  <h4>
-                    {service.href ? (
-                      <Link href={service.href} className="stretched-link">
-                        {service.title}
-                      </Link>
-                    ) : (
-                      service.title
-                    )}
-                  </h4>
-                  <p>{service.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      {/* /Services Section */}
-
       {/* Portfolio Section */}
       <section
         id={siteData.portfolioData.anchorId}
@@ -176,9 +182,11 @@ export default function Home() {
         {/* Titles */}
         <div className="container section-title" data-aos="fade-up">
           {/* title */}
-          <span className="description-title">
-            {siteData.portfolioData.title}
-          </span>
+          {siteData.siteConfig.ui.sectionsTitleShadow && (
+            <span className="description-title">
+              {siteData.portfolioData.title}
+            </span>
+          )}
           <h2>{siteData.portfolioData.title}</h2>
 
           {/* subtitle */}
@@ -245,15 +253,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* add <br /> for spacing to nav highlight for 'portfolio' works */}
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
     </>
   );
 }

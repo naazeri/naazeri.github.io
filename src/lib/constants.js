@@ -1,8 +1,18 @@
 export const siteData = {
+  siteConfig: {
+    title: 'Nazeriland | ناظری لند',
+    description: 'ناظری لند | ناظری لند | ناظری لند',
+    keywords: 'ناظری لند | ناظری لند | ناظری لند',
+    author: 'ناظری لند',
+    url: 'https://nazeriland.com',
+    ui: {
+      sectionsTitleShadow: false,
+    },
+  },
   navData: [
     { label: 'خانه', href: '/' },
-    { label: 'درباره', href: '/#about' },
     { label: 'خدمات', href: '/#service' },
+    { label: 'درباره', href: '/#about' },
     { label: 'نمونه کار', href: '/#portfolio' },
     // { label: 'مطالب', href: '/#blog' },
   ],
