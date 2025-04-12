@@ -104,8 +104,9 @@ export const siteData = {
     title: 'نمونه کارها',
     subtitle: '',
     categories: [
-      { id: 1, label: 'وب سایت', slug: 'website' },
-      { id: 2, label: 'اپلیکیشن', slug: 'app' },
+      { id: 1, label: 'پورتفولیو', slug: 'personal' },
+      { id: 2, label: 'فروشگاه', slug: 'ecommerce' },
+      { id: 3, label: 'سرویس دهنده', slug: 'saas' },
     ],
     projects: [
       {
@@ -140,7 +141,7 @@ export const siteData = {
         id: 3,
         order: 4,
         title: 'هنرستان خوش بیان',
-        categories: [1],
+        categories: [1, 2],
         client: 'خوش بیان و ترنج',
         date: '۱۳۹۷',
         url: 'https://amordadoffice.com/',
@@ -153,7 +154,7 @@ export const siteData = {
         id: 4,
         order: 1,
         title: 'اِکو',
-        categories: [1, 2],
+        categories: [3],
         client: 'توسعه ايمن پايدار فناوری توس (اِکو)',
         url: 'https://ecobin.ir/',
         description:
@@ -170,7 +171,7 @@ export const siteData = {
         id: 5,
         order: 5,
         title: 'قاصتک ',
-        categories: [1],
+        categories: [2],
         client: 'قاصتک',
         url: 'https://ghasetak.com',
         description:
