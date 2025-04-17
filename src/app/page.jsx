@@ -38,7 +38,7 @@ export default function Home() {
           data-aos-delay="100"
         >
           <LottieAnimation src="/assets/animation/social-media.json" />
-          <h2>{siteData.heroData.title}</h2>
+          <h2 className="mt-3">{siteData.heroData.title}</h2>
           <p>{siteData.heroData.subtitle}</p>
           <a href="#about" className="btn-scroll" title="Scroll Down">
             <i className="bi bi-chevron-down"></i>

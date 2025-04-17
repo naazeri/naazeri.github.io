@@ -13,7 +13,12 @@ const Player = dynamic(
 export default function LottieAnimation({ src }) {
   return (
     <div className="lottie-animation" style={{ marginTop: '20px' }}>
-      <Player autoplay src={src} style={{ height: '400px', width: '400px' }} />
+      <Player
+        autoplay
+        loop
+        src={src}
+        style={{ height: '400px', width: '400px' }}
+      />
     </div>
   );
 }
