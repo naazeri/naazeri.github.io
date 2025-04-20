@@ -17,7 +17,7 @@ export default function LottieAnimation({ src }) {
         autoplay
         loop
         src={src}
-        style={{ height: '400px', width: '400px' }}
+        style={{ height: 'auto', width: '99%', maxWidth: '550px' }}
       />
     </div>
   );
