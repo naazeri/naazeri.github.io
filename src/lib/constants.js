@@ -43,7 +43,7 @@ export const siteData = {
         text: 'مشاهده',
         headIcon: 'telegram',
         tailIcon: null,
-        href: 'https://t.me/PyReza',
+        href: 'https://t.me/NazeriNazeri',
         showInFooter: true,
       },
       {
