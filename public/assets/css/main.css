@@ -510,7 +510,7 @@ h6 {
   justify-content: center;
   background: var(--accent-color);
   color: var(--surface-color);
-  line-height: 1;
+  line-height: 1rem;
   margin: 0 4px;
   border-radius: 50%;
   text-align: center;

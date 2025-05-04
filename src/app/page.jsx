@@ -37,8 +37,8 @@ export default function Home() {
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          <LottieAnimation src="/assets/animation/social-media.json" />
-          <h2>{siteData.heroData.title}</h2>
+          <LottieAnimation src="/assets/animation/animation.json" />
+          <h2 className="mt-3">{siteData.heroData.title}</h2>
           <p>{siteData.heroData.subtitle}</p>
           <a href="#about" className="btn-scroll" title="Scroll Down">
             <i className="bi bi-chevron-down"></i>
