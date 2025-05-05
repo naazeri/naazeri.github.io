@@ -48,52 +48,58 @@ export default function Home() {
       {/* /Hero Section */}
 
       {/* Services Section */}
-      <section id={siteData.serviceData.anchorId} className="services section">
-        {/* Titles */}
-        <div className="container section-title" data-aos="fade-up">
-          {/* title */}
-          {siteData.siteConfig.ui.sectionsTitleShadow && (
-            <span className="description-title">
-              {siteData.serviceData.title}
-            </span>
-          )}
-          <h2>{siteData.serviceData.title}</h2>
+      {siteData.serviceData.active && (
+        <section
+          id={siteData.serviceData.anchorId}
+          className="services section"
+        >
+          {/* Titles */}
+          <div className="container section-title" data-aos="fade-up">
+            {/* title */}
+            {siteData.siteConfig.ui.sectionsTitleShadow && (
+              <span className="description-title">
+                {siteData.serviceData.title}
+              </span>
+            )}
+            <h2>{siteData.serviceData.title}</h2>
 
-          {/* subtitle */}
-          <p>{siteData.serviceData.subtitle}</p>
-        </div>
-
-        {/* service cards */}
-        <div className="container">
-          <div className="row gy-4">
-            {/* Service card item */}
-            {siteData.serviceData.services.map((service, index) => (
-              <div
-                key={index}
-                className="col-xl-3 col-md-6 d-flex"
-                data-aos="none"
-                data-aos-delay={200 + index * 100}
-              >
-                <div className="service-item position-relative">
-                  <div className="icon">
-                    <i className={`icon bi bi-${service.icon}`}></i>
-                  </div>
-                  <h4>
-                    {service.href ? (
-                      <Link href={service.href} className="stretched-link">
-                        {service.title}
-                      </Link>
-                    ) : (
-                      service.title
-                    )}
-                  </h4>
-                  <p>{service.description}</p>
-                </div>
-              </div>
-            ))}
+            {/* subtitle */}
+            <p>{siteData.serviceData.subtitle}</p>
           </div>
-        </div>
-      </section>
+
+          {/* service cards */}
+          <div className="container">
+            <div className="row gy-4">
+              {/* Service card item */}
+              {siteData.serviceData.services.map((service, index) => (
+                <div
+                  key={index}
+                  className="col-xl-3 col-md-6 d-flex"
+                  data-aos="none"
+                  data-aos-delay={200 + index * 100}
+                >
+                  <div className="service-item position-relative">
+                    <div className="icon">
+                      <i className={`icon bi bi-${service.icon}`}></i>
+                    </div>
+                    <h4>
+                      {service.href ? (
+                        <Link href={service.href} className="stretched-link">
+                          {service.title}
+                        </Link>
+                      ) : (
+                        service.title
+                      )}
+                    </h4>
+                    <p>{service.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* /Services Section */}
 
       {/* About Section */}

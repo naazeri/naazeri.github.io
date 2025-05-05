@@ -10,7 +10,7 @@ export const siteData = {
   },
   navData: [
     { label: 'خانه', href: '/' },
-    { label: 'خدمات', href: '/#service' },
+    // { label: 'خدمات', href: '/#service' },
     { label: 'درباره', href: '/#about' },
     { label: 'نمونه کار', href: '/#portfolio' },
     // { label: 'مطالب', href: '/#blog' },
@@ -29,6 +29,7 @@ export const siteData = {
       'مهندس نرم‌افزار و توسعه‌دهنده وب با بیش از 10 سال تجربه در ساخت وب سایت‌های مدرن، کاربر پسند و مقیاس پذیر.',
     description:
       'اگر به دنبال یک راه‌حل خلاقانه و کارآمد برای پروژه‌های خود هستید، خوشحال میشم که همکاری کنیم!',
+    active: true,
     socials: [
       {
         label: 'ایمیل',
@@ -84,6 +85,7 @@ export const siteData = {
     anchorId: 'service',
     title: 'خدمات',
     subtitle: '',
+    active: false,
     services: [
       {
         title: 'وب سایت سفارشی',
@@ -112,6 +114,7 @@ export const siteData = {
     anchorId: 'portfolio',
     title: 'نمونه کارها',
     subtitle: '',
+    active: true,
     categories: [
       { id: 1, label: 'پورتفولیو', slug: 'personal' },
       { id: 2, label: 'فروشگاه', slug: 'ecommerce' },
@@ -201,5 +204,6 @@ export const siteData = {
     subtitle: '',
     copyright: `رضا ناظری © ${new Date().getFullYear()} - 2015`,
     credits: '',
+    active: true,
   },
 };
