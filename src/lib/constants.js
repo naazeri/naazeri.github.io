@@ -137,19 +137,19 @@ export const siteData = {
           '/assets/img/portfolio/modernacy/3.webp',
         ],
       },
-      {
-        id: 2,
-        order: 3,
-        title: 'اَمرداد آفیس',
-        categories: [1],
-        client: 'Amordad Office',
-        url: 'https://amordadoffice.com/',
-        date: '2024',
-        description:
-          'وب سایت اختصاصی شرکت معماری اَمرداد آفیس، فضایی برای دیدن زیباترین پروژه‌های معماری و یادگیری نکات جذاب درباره طراحی ساختمان.<br>این سایت، هم نمایشگاه دائمی آثار شرکت است و هم مدرسه‌ای برای آموزش معماری به زبان ساده.',
-        image: '/assets/img/portfolio/amordadoffice/1.webp',
-        gallery: ['/assets/img/portfolio/amordadoffice/2.webp'],
-      },
+      // {
+      //   id: 2,
+      //   order: 3,
+      //   title: 'اَمرداد آفیس',
+      //   categories: [1],
+      //   client: 'Amordad Office',
+      //   url: 'https://amordadoffice.com/',
+      //   date: '2024',
+      //   description:
+      //     'وب سایت اختصاصی شرکت معماری اَمرداد آفیس، فضایی برای دیدن زیباترین پروژه‌های معماری و یادگیری نکات جذاب درباره طراحی ساختمان.<br>این سایت، هم نمایشگاه دائمی آثار شرکت است و هم مدرسه‌ای برای آموزش معماری به زبان ساده.',
+      //   image: '/assets/img/portfolio/amordadoffice/1.webp',
+      //   gallery: ['/assets/img/portfolio/amordadoffice/2.webp'],
+      // },
       {
         id: 3,
         order: 4,
@@ -202,7 +202,7 @@ export const siteData = {
   footerData: {
     title: 'Nazeriland',
     subtitle: '',
-    copyright: `رضا ناظری © ${new Date().getFullYear()} - 2015`,
+    copyright: `2015 - ${new Date().getFullYear()} &copy;`,
     credits: '',
     active: true,
   },
