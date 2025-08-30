@@ -12,7 +12,7 @@ export const siteData = {
     { label: 'خانه', href: '/' },
     // { label: 'خدمات', href: '/#service' },
     { label: 'درباره', href: '/#about' },
-    { label: 'نمونه کار', href: '/#portfolio' },
+    // { label: 'نمونه کار', href: '/#portfolio' },
     // { label: 'مطالب', href: '/#blog' },
   ],
   heroData: {
@@ -114,7 +114,7 @@ export const siteData = {
     anchorId: 'portfolio',
     title: 'نمونه کارها',
     subtitle: '',
-    active: true,
+    active: false,
     categories: [
       { id: 1, label: 'پورتفولیو', slug: 'personal' },
       { id: 2, label: 'فروشگاه', slug: 'ecommerce' },
@@ -202,7 +202,7 @@ export const siteData = {
   footerData: {
     title: 'Nazeriland',
     subtitle: '',
-    copyright: `2015 - ${new Date().getFullYear()} &copy;`,
+    copyright: `${new Date().getFullYear()} - 2015 &copy;`,
     credits: '',
     active: true,
   },
