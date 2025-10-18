@@ -18,7 +18,7 @@ export const siteData = {
   heroData: {
     anchorId: 'hero',
     title: 'رضا ناظری',
-    subtitle: 'برنامه نویس وب سایت',
+    subtitle: 'برنامه نویس و مهندس نرم افزار',
   },
   aboutData: {
     anchorId: 'about',
