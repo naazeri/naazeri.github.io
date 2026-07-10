@@ -125,13 +125,15 @@ export default function Home() {
           <div className="container" data-aos="fade-up" data-aos-delay="100">
             <div className="row gy-4 justify-content-center">
               {/* about image */}
+              {siteData.aboutData.showImage && (
               <div className="col-lg-4">
                 <img
-                  src="/assets/img/reza-nazeri.webp"
+                  src={siteData.aboutData.image}
                   className="img-fluid"
                   alt=""
                 />
               </div>
+              )}
 
               {/* about text */}
               <div className="col-lg-8 content">

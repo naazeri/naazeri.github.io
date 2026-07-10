@@ -28,9 +28,19 @@ export const siteData = {
     subtitle2:
       'مهندس نرم‌افزار و توسعه‌دهنده وب با بیش از 10 سال تجربه در ساخت وب سایت‌های مدرن، کاربر پسند و مقیاس پذیر.',
     description: '',
+    image: '/assets/img/reza-nazeri.jpg',
+    showImage: false,
     // 'اگر به دنبال یک راه‌حل خلاقانه و کارآمد برای پروژه‌های خود هستید، خوشحال میشم که همکاری کنیم!',
     active: true,
     socials: [
+      {
+        label: 'لینکدین',
+        text: 'مشاهده',
+        headIcon: 'linkedin',
+        tailIcon: null,
+        href: 'https://www.linkedin.com/in/rezanazeri',
+        showInFooter: true,
+      },
       {
         label: 'ایمیل',
         text: 'reza.nazeri.dev@gmail.com',
@@ -53,14 +63,6 @@ export const siteData = {
         headIcon: 'instagram',
         tailIcon: null,
         href: 'https://instagram.com/re_nazeri',
-        showInFooter: true,
-      },
-      {
-        label: 'لینکدین',
-        text: 'مشاهده',
-        headIcon: 'linkedin',
-        tailIcon: null,
-        href: 'https://www.linkedin.com/in/rezanazeri',
         showInFooter: true,
       },
       {
