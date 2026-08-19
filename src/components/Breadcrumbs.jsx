@@ -2,12 +2,15 @@
 
 import Link from 'next/link';
 
-export default function Breadcrumbs({ items = [] }) {
-  // Add home as first item if items array is not empty
+export default function Breadcrumbs({
+  homeHref = '/',
+  homeLabel = 'Home',
+  items = [],
+}) {
   const breadcrumbs =
     items.length > 0
       ? [
-          { href: '/', label: 'خانه' },
+          { href: homeHref, label: homeLabel },
           ...items.map((item, index) => ({
             href: '#',
             label: item,

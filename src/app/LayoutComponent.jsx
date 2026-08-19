@@ -2,39 +2,35 @@
 
 import Script from 'next/script';
 import Link from 'next/link';
-import '../styles/global.css';
-import { siteData } from '@/lib/constants';
+import LanguageSelect from '@/components/LanguageSelect';
+import { getSiteData } from '@/lib/i18n/config';
 import { useEffect } from 'react';
 import { mainScript } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 
-export default function LayoutComponent({ children }) {
-  const pathname = usePathname(); // Get current pathname
+export default function LayoutComponent({ locale, children }) {
+  const pathname = usePathname();
+  const siteData = getSiteData(locale);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Ensure the script is fully loaded before calling
-      mainScript(); // Call the global function
-      // setIsLoading(false);
+      mainScript();
     }
   }, [pathname]);
 
   return (
-    <html lang="fa" dir="rtl">
-      <body>
+    <>
         <header
           id="header"
           className="header d-flex align-items-center fixed-top"
         >
           <div className="container-fluid position-relative d-flex align-items-center justify-content-between">
-            <Link href="/" className="logo d-flex align-items-center">
-              {/* Uncomment the line below if you also wish to use an image logo */}
+            <Link href={`/${locale}/`} className="logo d-flex align-items-center">
               <img
                 src="/assets/img/nazeriland-white.webp"
                 alt="Nazeriland logo"
                 className="site-logo"
               />
-              {/* <h1 className="sitename">Nazeriland</h1> */}
             </Link>
 
             <nav id="navmenu" className="navmenu">
@@ -49,18 +45,7 @@ export default function LayoutComponent({ children }) {
             </nav>
 
             <div className="header-social-links">
-              {/* <a href="#" className="twitter">
-                        <i className="bi bi-twitter-x"></i>
-                      </a>
-                      <a href="#" className="facebook">
-                        <i className="bi bi-facebook"></i>
-                      </a>
-                      <a href="#" className="instagram">
-                        <i className="bi bi-instagram"></i>
-                      </a>
-                      <a href="#" className="linkedin">
-                        <i className="bi bi-linkedin"></i>
-                      </a> */}
+              <LanguageSelect locale={locale} />
             </div>
           </div>
         </header>
@@ -72,17 +57,14 @@ export default function LayoutComponent({ children }) {
           className="footer position-relative dark-background"
         >
           <div className="container">
-            {/* title */}
             <h3 className="sitename">{siteData.footerData.title}</h3>
 
-            {/* subtitle */}
             <p
               dangerouslySetInnerHTML={{
                 __html: siteData.footerData.subtitle,
               }}
             ></p>
 
-            {/* social links */}
             <div className="social-links d-flex justify-content-center">
               {siteData.aboutData.socials
                 .filter((social) => social.showInFooter)
@@ -93,7 +75,6 @@ export default function LayoutComponent({ children }) {
                 ))}
             </div>
 
-            {/* copyright */}
             <div className="container">
               <div
                 className="copyright"
@@ -111,7 +92,6 @@ export default function LayoutComponent({ children }) {
           </div>
         </footer>
 
-        {/* Scroll Top */}
         <a
           href="#"
           id="scroll-top"
@@ -120,7 +100,6 @@ export default function LayoutComponent({ children }) {
           <i className="bi bi-arrow-up-short"></i>
         </a>
 
-        {/* Vendor JS Files */}
         <Script
           src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"
           strategy="beforeInteractive"
@@ -149,8 +128,6 @@ export default function LayoutComponent({ children }) {
           src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"
           strategy="beforeInteractive"
         ></Script>
-        {/* <Script src="/assets/js/main.js" strategy="beforeInteractive"></Script> */}
-      </body>
-    </html>
+    </>
   );
 }

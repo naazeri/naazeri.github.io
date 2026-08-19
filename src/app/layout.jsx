@@ -1,13 +1,17 @@
-import { siteData } from '@/lib/constants';
-import '../styles/global.css';
-import LayoutComponent from './LayoutComponent';
+import LocaleHtmlAttributes from '@/components/LocaleHtmlAttributes';
+import '@/styles/global.css';
 
 export const metadata = {
-  title: siteData.siteConfig.title,
-  description: siteData.siteConfig.description,
-  authors: [{ name: siteData.siteConfig.author, url: siteData.siteConfig.url }],
+  title: 'Nazeriland',
 };
 
 export default function RootLayout({ children }) {
-  return <LayoutComponent>{children}</LayoutComponent>;
+  return (
+    <html lang="en" dir="ltr" suppressHydrationWarning>
+      <body>
+        <LocaleHtmlAttributes />
+        {children}
+      </body>
+    </html>
+  );
 }

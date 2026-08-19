@@ -1,4 +1,4 @@
-export const siteData = {
+export const faSiteData = {
   siteConfig: {
     title: 'Nazeriland | ناظری لند',
     description: 'ناظری لند | ناظری لند | ناظری لند',
@@ -8,12 +8,23 @@ export const siteData = {
       sectionsTitleShadow: false,
     },
   },
+  ui: {
+    home: 'خانه',
+    viewDetails: 'مشاهده جزئیات',
+    all: 'همه',
+    projectDetails: 'جزئیات پروژه',
+    projectInfo: 'اطلاعات پروژه',
+    category: 'دسته بندی',
+    client: 'کارفرما',
+    projectDate: 'تاریخ شروع پروژه',
+    projectUrl: 'آدرس پروژه',
+    view: 'مشاهده',
+    scrollDown: 'پایین',
+    langSwitch: 'EN',
+  },
   navData: [
-    { label: 'خانه', href: '/' },
-    // { label: 'خدمات', href: '/#service' },
-    { label: 'درباره', href: '/#about' },
-    // { label: 'نمونه کار', href: '/#portfolio' },
-    // { label: 'مطالب', href: '/#blog' },
+    { label: 'خانه', href: '/fa/' },
+    { label: 'درباره', href: '/fa/#about' },
   ],
   heroData: {
     anchorId: 'hero',
@@ -30,7 +41,6 @@ export const siteData = {
     description: '',
     image: '/assets/img/reza-nazeri.jpg',
     showImage: false,
-    // 'اگر به دنبال یک راه‌حل خلاقانه و کارآمد برای پروژه‌های خود هستید، خوشحال میشم که همکاری کنیم!',
     active: true,
     socials: [
       {
@@ -55,22 +65,6 @@ export const siteData = {
         headIcon: 'telegram',
         tailIcon: null,
         href: 'https://t.me/NazeriNazeri',
-        showInFooter: true,
-      },
-      {
-        label: 'اینستاگرام',
-        text: 'مشاهده',
-        headIcon: 'instagram',
-        tailIcon: null,
-        href: 'https://instagram.com/re_nazeri',
-        showInFooter: true,
-      },
-      {
-        label: 'یوتیوب',
-        text: 'مشاهده',
-        headIcon: 'youtube',
-        tailIcon: null,
-        href: 'https://youtube.com/@naazeri',
         showInFooter: true,
       },
       {
@@ -139,19 +133,6 @@ export const siteData = {
           '/assets/img/portfolio/modernacy/3.webp',
         ],
       },
-      // {
-      //   id: 2,
-      //   order: 3,
-      //   title: 'اَمرداد آفیس',
-      //   categories: [1],
-      //   client: 'Amordad Office',
-      //   url: 'https://amordadoffice.com/',
-      //   date: '2024',
-      //   description:
-      //     'وب سایت اختصاصی شرکت معماری اَمرداد آفیس، فضایی برای دیدن زیباترین پروژه‌های معماری و یادگیری نکات جذاب درباره طراحی ساختمان.<br>این سایت، هم نمایشگاه دائمی آثار شرکت است و هم مدرسه‌ای برای آموزش معماری به زبان ساده.',
-      //   image: '/assets/img/portfolio/amordadoffice/1.webp',
-      //   gallery: ['/assets/img/portfolio/amordadoffice/2.webp'],
-      // },
       {
         id: 3,
         order: 4,

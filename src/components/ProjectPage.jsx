@@ -1,31 +1,17 @@
-import { siteData } from '@/lib/constants';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { getSiteData } from '@/lib/i18n/config';
 import sanitizeHtml from 'sanitize-html';
 
-// Generate static params for static export
-export async function generateStaticParams() {
-  return siteData.portfolioData.projects.map((item) => ({
-    slug: item.id.toString(),
-  }));
-}
-
-// Generate metadata for dynamic title
-export async function generateMetadata({ params }) {
-  const { slug } = await params;
+export default function ProjectPage({ locale, slug }) {
+  const siteData = getSiteData(locale);
   const project = siteData.portfolioData.projects.find(
     (item) => item.id === parseInt(slug)
   );
 
-  return {
-    title: `جزئیات پروژه ${project?.title}`,
-  };
-}
+  if (!project) {
+    return null;
+  }
 
-export default async function Page({ params }) {
-  const { slug } = await params;
-  const project = siteData.portfolioData.projects.find(
-    (item) => item.id === parseInt(slug)
-  );
   const categories = project.categories
     ?.map(
       (catId) =>
@@ -35,20 +21,21 @@ export default async function Page({ params }) {
 
   return (
     <>
-      {/* Page Title */}
       <div className="page-title dark-background">
         <div className="container position-relative">
           <h1>{project.title}</h1>
           {categories && <p>{categories}</p>}
-          <Breadcrumbs items={['جزئیات پروژه']} />
+          <Breadcrumbs
+            homeHref={`/${locale}/`}
+            homeLabel={siteData.ui.home}
+            items={[siteData.ui.projectDetails]}
+          />
         </div>
       </div>
 
-      {/* Portfolio Details Section */}
       <section id="portfolio-details" className="portfolio-details section">
         <div className="container" data-aos="fade-up" data-aos-delay="100">
           <div className="row gy-4">
-            {/* slider images (gallery) */}
             <div className="col-lg-8">
               <div className="portfolio-details-slider swiper init-swiper">
                 <div className="swiper-wrapper align-items-center">
@@ -72,35 +59,34 @@ export default async function Page({ params }) {
               </div>
             </div>
 
-            {/* Project Info */}
             <div className="col-lg-4">
               <div
                 className="portfolio-info"
                 data-aos="fade-up"
                 data-aos-delay="200"
               >
-                <h3>اطلاعات پروژه</h3>
+                <h3>{siteData.ui.projectInfo}</h3>
                 <ul>
                   {categories && (
                     <li>
-                      <strong>دسته بندی</strong>: {categories}
+                      <strong>{siteData.ui.category}</strong>: {categories}
                     </li>
                   )}
                   {project.client && (
                     <li>
-                      <strong>کارفرما</strong>: {project.client}
+                      <strong>{siteData.ui.client}</strong>: {project.client}
                     </li>
                   )}
                   {project.date && (
                     <li>
-                      <strong>تاریخ شروع پروژه</strong>: {project.date}
+                      <strong>{siteData.ui.projectDate}</strong>: {project.date}
                     </li>
                   )}
                   {project.url && (
                     <li>
-                      <strong>آدرس پروژه</strong>:{' '}
+                      <strong>{siteData.ui.projectUrl}</strong>:{' '}
                       <a href={project.url} target="_blank">
-                        مشاهده
+                        {siteData.ui.view}
                       </a>
                     </li>
                   )}
