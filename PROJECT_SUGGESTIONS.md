@@ -1,71 +1,21 @@
 # Nazeriland — Project Review & Suggestions
 
-**Scanned:** August 20, 2026  
-**Stack:** Next.js 15 (App Router), React 19, static export (`output: 'export'`), i18n (en/fa), MUI (unused), Bootstrap template assets
+**Last scanned:** August 20, 2026  
+**Stack:** Next.js 15 (App Router), React 19, static export (`output: 'export'`), i18n (en/fa), Bootstrap template assets, Vitest + Playwright
 
-Build and lint both pass. The suggestions below are ordered by impact.
+**Health check:** `npm run lint`, `npm run test`, and `npm run build` all pass. Static export generates **16 routes** (locales, projects, sitemap, robots, redirect).
+
+**Progress:** 16 of 26 items completed. **10 open** suggestions remain below.
 
 ---
 
 ## High priority
 
-### 1. ~~`mainScript()` re-runs on every navigation and stacks event listeners~~ ✅ Done
-
-**File:** `src/app/LayoutComponent.jsx`, `src/lib/utils.js`
-
-Split into `initLayoutScript()` (runs once for header/nav/scroll listeners) and `initPageScript()` (re-inits per route with cleanup). Event listeners use `AbortController`; Swiper, Isotope, and GLightbox instances are destroyed on route change; AOS uses `refresh()` after the first init.
-
----
-
-### 2. ~~Invalid project URLs render a blank page instead of 404~~ ✅ Done
-
-**File:** `src/components/ProjectPage.jsx`, `src/app/[locale]/project/[slug]/page.jsx`
-
-Added `getProjectBySlug()` helper. The route page and `generateMetadata` now call `notFound()` when the slug is missing or invalid; `ProjectPage` receives a validated `project` prop.
-
----
-
-### 3. ~~Unused MUI / Emotion dependencies~~ ✅ Done
-
-**Files:** `package.json`, `src/styles/theme.js`
-
-Removed `@mui/material`, `@mui/icons-material`, `@mui/material-nextjs`, and all `@emotion/*` packages. Deleted unused `src/styles/theme.js`.
-
----
-
-### 4. ~~Inconsistent HTML sanitization (`dangerouslySetInnerHTML`)~~ ✅ Done
-
-**Files:** `src/lib/sanitizeHtml.js`, `src/components/HomePage.jsx`, `src/app/LayoutComponent.jsx`, `src/components/ProjectPage.jsx`
-
-Added shared `sanitizeContent()` / `sanitizedHtml()` helpers. All `dangerouslySetInnerHTML` usage now goes through `sanitize-html` consistently.
-
----
-
-### 5. ~~External links missing `rel="noopener noreferrer"`~~ ✅ Done
-
-**Files:** `src/components/HomePage.jsx`, `src/components/ProjectPage.jsx`, `src/app/LayoutComponent.jsx`
-
-Added `rel="noopener noreferrer"` to all `target="_blank"` links.
+*No open high-priority items.*
 
 ---
 
 ## Medium priority
-
-### 6. ~~Root `/` uses client-side redirect~~ ✅ Done
-
-**File:** `src/app/page.jsx`
-
-Replaced the client-side `useRouter().replace()` with a Server Component `redirect('/en/')` from `next/navigation` (works with static export).
-
----
-
-### 7. ~~`lang` and `dir` are set client-side~~ ✅ Done
-
-**Files:** `src/app/(localized)/[locale]/layout.jsx`, removed `LocaleHtmlAttributes.jsx`
-
-Restructured with route groups and multiple root layouts. Locale routes render `<html lang={locale} dir="...">` server-side; the root redirect uses its own minimal layout.
-
----
 
 ### 8. Heavy vendor scripts load on every page
 
@@ -77,47 +27,7 @@ These scripts load globally with `beforeInteractive`:
 
 Portfolio and services sections are **`active: false`** in locale data, but Isotope/Swiper/GLightbox still load on the homepage.
 
-**Suggestion:** Lazy-load vendor scripts only on routes/sections that need them (dynamic `import()` or conditional `<Script strategy="lazyOnload">`). Trim unused vendors (e.g. php-email-form — no contact form exists).
-
----
-
-### 9. ~~Vendor folder bloat (~10 MB)~~ ✅ Done
-
-**Path:** `public/assets/vendor/`
-
-Removed unused Bootstrap sources, RTL variants, source maps, and duplicate non-minified vendor files. Kept 14 referenced assets only (~1.0 MB, down from ~10 MB).
-
----
-
-### 10. ~~Missing SEO essentials~~ ✅ Done
-
-**Files:** `src/lib/metadata.js`, `src/app/sitemap.js`, `src/app/robots.js`, locale and project `generateMetadata`
-
-Added static `sitemap.xml` and `robots.txt` generation. Shared metadata helper adds Open Graph and Twitter card tags for home and project pages.
-
----
-
-### 11. ~~`site.webmanifest` has empty branding~~ ✅ Done
-
-**File:** `public/site.webmanifest`
-
-Set `name` and `short_name` to `"Nazeriland"`. Aligned `theme_color` with site accent (`#ffbb27`) and `background_color` with the dark hero/header (`#060606`).
-
----
-
-### 12. ~~README is outdated boilerplate~~ ✅ Done
-
-**File:** `README.md`
-
-Rewrote for this project: stack, structure, i18n content editing, routing, scripts, and GitHub Pages deployment.
-
----
-
-### 13. ~~Package manager configuration is mixed~~ ✅ Done
-
-**Files:** `package.json`, `package-lock.json`, `README.md`
-
-Standardized on npm: removed `yarn.lock`, removed pnpm config from `package.json`, and updated README install instructions.
+**Suggestion:** Lazy-load vendor scripts only on routes/sections that need them (`strategy="lazyOnload"` or dynamic import). Remove php-email-form (no contact form in the app).
 
 ---
 
@@ -125,29 +35,31 @@ Standardized on npm: removed `yarn.lock`, removed pnpm config from `package.json
 
 **File:** `package.json`
 
-`postcss` is in `dependencies` but there is no `postcss.config.*` in the project. It may be an unused transitive leftover.
+`postcss` is in `dependencies` but there is no `postcss.config.*` in the project.
 
-**Suggestion:** Move to `devDependencies` if needed, or remove if Next.js does not require a direct dependency.
+**Suggestion:** Move to `devDependencies` if needed, or remove the direct dependency and rely on Next.js tooling.
 
 ---
 
 ### 15. No automated CI
 
-No `.github/workflows` or similar pipeline for lint/build on push/PR.
+No `.github/workflows` pipeline for lint/build/test on push or PR.
 
-**Suggestion:** Add a minimal GitHub Action: `npm ci` → `npm run lint` → `npm run build`. Optionally auto-deploy `out/` to GitHub Pages on `main`.
+**Suggestion:** Add a GitHub Action: `npm ci` → `npm run lint` → `npm run test` → `npm run build`. Optionally deploy `out/` to GitHub Pages on `main`.
+
+---
+
+### 25. Dependency updates (non-urgent)
+
+`npm audit` reports **3 vulnerabilities** (1 critical, 2 high) in `next`, `postcss`, and `sharp` (transitive). Current versions build and test successfully.
+
+For this static GitHub Pages site, server-side CVEs are mostly **lower risk** in production, but upgrades are still good hygiene.
+
+**Suggestion:** Bump `next` and `eslint-config-next` to latest **15.5.x** in a controlled branch (`npm run test:all` after). Avoid blind `npm audit fix --force` (may jump to Next 16).
 
 ---
 
 ## Low priority
-
-### 16. ~~No tests~~ ✅ Done
-
-**Files:** `tests/i18n.smoke.test.js`, `tests/e2e/locales.smoke.spec.js`, `src/lib/staticParams.js`
-
-Added Vitest smoke tests for i18n config and static params, plus Playwright checks that `/en/` and `/fa/` render with correct `lang`/`dir`.
-
----
 
 ### 17. JavaScript instead of TypeScript
 
@@ -161,24 +73,23 @@ The project uses `.jsx`/`.js` with minimal `jsconfig.json`. Locale data shapes a
 
 **Files:** `src/components/HomePage.jsx`, `src/app/LayoutComponent.jsx`, `src/components/Breadcrumbs.jsx`
 
-Several `.map()` calls use `index` as `key`. Stable IDs (e.g. `service.title`, `social.href`, nav `href`) are safer if lists reorder.
+Several `.map()` calls use `index` as `key`. Stable IDs (e.g. `social.href`, nav `href`, `service.title`) are safer if lists reorder.
 
 ---
 
-### 19. Dead code in `mainScript`
+### 19. Dead code in layout scripts
 
 **File:** `src/lib/utils.js`
 
-- `initSwiperWithCustomPagination` is called but never defined (only matters if `.swiper-tab` is added later).
-- Dropdown toggle handlers target `.toggle-dropdown`, which does not exist in current nav markup.
+Dropdown toggle handlers target `.toggle-dropdown`, which does not exist in current nav markup.
 
-**Suggestion:** Remove unused branches or implement them when needed.
+**Suggestion:** Remove unused handler block or implement dropdown nav when needed.
 
 ---
 
 ### 20. Hardcoded locale in navigation hrefs
 
-**File:** `src/lib/i18n/en.js`, `src/lib/i18n/fa.js`
+**Files:** `src/lib/i18n/en.js`, `src/lib/i18n/fa.js`
 
 Nav items use absolute paths like `/en/#about`. Works but duplicates locale in every entry.
 
@@ -186,13 +97,13 @@ Nav items use absolute paths like `/en/#about`. Works but duplicates locale in e
 
 ---
 
-### 21. `<img>` instead of optimized images
+### 21. `<img>` without explicit dimensions
 
 **Files:** `src/components/HomePage.jsx`, `src/components/ProjectPage.jsx`
 
-Plain `<img>` tags are used throughout. Static export sets `images.unoptimized: true`, so `next/image` gives limited benefit, but width/height attributes would still help CLS.
+Plain `<img>` tags are used throughout. Static export sets `images.unoptimized: true`, so `next/image` gives limited benefit, but width/height or aspect-ratio would reduce CLS.
 
-**Suggestion:** Add explicit `width`/`height` or aspect-ratio CSS; consider WebP/AVIF for any remaining PNG assets (e.g. Ghasetak portfolio image).
+**Suggestion:** Add explicit dimensions or CSS aspect-ratio. Convert remaining PNG portfolio assets to WebP where possible.
 
 ---
 
@@ -200,7 +111,7 @@ Plain `<img>` tags are used throughout. Static export sets `images.unoptimized: 
 
 No `Person` or `WebSite` schema for search engines.
 
-**Suggestion:** Add JSON-LD in locale layout using data from `siteConfig` (name, url, sameAs social links).
+**Suggestion:** Add JSON-LD in locale layout using `siteConfig` (name, url, `sameAs` social links).
 
 ---
 
@@ -208,35 +119,31 @@ No `Person` or `WebSite` schema for search engines.
 
 Next.js generates a default `/_not-found`. No branded `not-found.jsx`.
 
-**Suggestion:** Add `src/app/not-found.jsx` (and optionally locale-aware variant) matching site design.
+**Suggestion:** Add `src/app/not-found.jsx` (and optionally locale-aware styling) matching site design.
 
 ---
 
-### 24. ~~Junk file in vendor tree~~ ✅ Done
+### 26. `site.webmanifest` not linked in HTML
 
-**File:** `public/assets/vendor/bootstrap/css/prb.txt`
+**File:** `public/site.webmanifest`, locale layouts
 
-Removed during vendor cleanup (#9).
+Manifest branding was fixed, but no `<link rel="manifest">` is emitted via `metadata` in the locale layout.
 
----
-
-### 25. Dependency updates (non-urgent)
-
-`npm outdated` shows Next.js 15.2.4 (latest 16.x), React 19.1.x (latest 19.2.x), and patch updates for several packages. Current versions build successfully.
-
-**Suggestion:** Plan a controlled upgrade (Next 16 + eslint-config-next) in a dedicated branch; patch-level updates can be applied more freely.
+**Suggestion:** Add `manifest: '/site.webmanifest'` to `generateMetadata` (or metadata export) so browsers and Lighthouse pick it up.
 
 ---
 
 ## What's working well
 
-- Clean App Router structure with `[locale]` routing and `generateStaticParams`
-- Static export setup is correct for GitHub Pages (`trailingSlash`, `CNAME`, deploy script)
-- i18n content is centralized and easy to edit
-- ESLint passes with no warnings
-- Production build exports 14 static pages successfully
-- Lottie animation correctly uses dynamic import with `ssr: false`
-- Project descriptions use `sanitize-html`
+- Route groups with server-side `lang` / `dir` per locale
+- Centralized i18n content in `src/lib/i18n/en.js` and `fa.js`
+- Static export for GitHub Pages (`trailingSlash`, `CNAME`, deploy script)
+- SEO: sitemap, robots, Open Graph, and Twitter metadata
+- Security: shared HTML sanitization, `rel="noopener noreferrer"` on external links
+- Layout scripts split with cleanup (`initLayoutScript` / `initPageScript`)
+- Smoke tests: Vitest (i18n + static params) and Playwright (`/en/`, `/fa/`)
+- Vendor folder trimmed to **~1.0 MB** (14 referenced files)
+- npm-only workflow with `package-lock.json` and updated README
 
 ---
 
@@ -244,13 +151,104 @@ Removed during vendor cleanup (#9).
 
 | Phase | Items | Effort |
 |-------|--------|--------|
-| 1 — Fix bugs | ~~#1~~, ~~#2~~, ~~#5~~ | Small |
-| 2 — Security & cleanup | ~~#4~~, ~~#3~~, ~~#24~~ | Small–medium |
-| 3 — Performance | #8, ~~#9~~ | Medium |
-| 4 — SEO & UX | ~~#6~~, ~~#7~~, ~~#10~~, ~~#11~~ | Medium |
-| 5 — Maintainability | ~~#12~~, ~~#13~~, #15, ~~#16~~ | Medium |
-| 6 — Polish | Remaining low items | Ongoing |
+| 1 — Performance | #8 | Medium |
+| 2 — Tooling | #14, #15, #25 | Small–medium |
+| 3 — Polish | #17–#23, #26 | Ongoing |
 
 ---
 
-*Generated from a static review of the codebase. Re-run build (`npm run build`) and manual smoke tests after applying changes.*
+## Completed
+
+### 1. ~~`mainScript()` re-runs on every navigation and stacks event listeners~~ ✅
+
+Split into `initLayoutScript()` (once) and `initPageScript()` (per route with cleanup). Uses `AbortController`; destroys Swiper/Isotope/GLightbox on navigation.
+
+**Files:** `src/app/LayoutComponent.jsx`, `src/lib/utils.js`
+
+---
+
+### 2. ~~Invalid project URLs render a blank page instead of 404~~ ✅
+
+Added `getProjectBySlug()`. Route page and `generateMetadata` call `notFound()` for invalid slugs.
+
+**Files:** `src/app/(localized)/[locale]/project/[slug]/page.jsx`, `src/components/ProjectPage.jsx`, `src/lib/i18n/config.js`
+
+---
+
+### 3. ~~Unused MUI / Emotion dependencies~~ ✅
+
+Removed all `@mui/*` and `@emotion/*` packages. Deleted unused `src/styles/theme.js`.
+
+---
+
+### 4. ~~Inconsistent HTML sanitization~~ ✅
+
+Added `src/lib/sanitizeHtml.js`. All `dangerouslySetInnerHTML` usage goes through shared helpers.
+
+---
+
+### 5. ~~External links missing `rel="noopener noreferrer"`~~ ✅
+
+Added to all `target="_blank"` links in HomePage, ProjectPage, and LayoutComponent.
+
+---
+
+### 6. ~~Root `/` uses client-side redirect~~ ✅
+
+Server-side `redirect('/en/')` in `src/app/(redirect)/page.jsx`.
+
+---
+
+### 7. ~~`lang` and `dir` set client-side~~ ✅
+
+Route groups with multiple root layouts. Locale routes render `<html lang dir>` server-side. Removed `LocaleHtmlAttributes.jsx`.
+
+**Files:** `src/app/(localized)/[locale]/layout.jsx`, `src/app/(redirect)/layout.jsx`
+
+---
+
+### 9. ~~Vendor folder bloat (~10 MB)~~ ✅
+
+Removed unused Bootstrap sources, RTL variants, source maps, and duplicates. **~1.0 MB** remaining (14 files).
+
+---
+
+### 10. ~~Missing SEO essentials~~ ✅
+
+Added `sitemap.js`, `robots.js`, and `src/lib/metadata.js` with Open Graph and Twitter tags.
+
+---
+
+### 11. ~~`site.webmanifest` empty branding~~ ✅
+
+Set `name`, `short_name`, `theme_color` (`#ffbb27`), and `background_color` (`#060606`).
+
+---
+
+### 12. ~~README outdated boilerplate~~ ✅
+
+Rewrote README: stack, structure, i18n editing, routing, testing, deployment.
+
+---
+
+### 13. ~~Mixed package manager configuration~~ ✅
+
+Standardized on npm. Removed `yarn.lock` and pnpm config. Added `package-lock.json`.
+
+---
+
+### 16. ~~No tests~~ ✅
+
+Vitest smoke tests (`tests/i18n.smoke.test.js`) and Playwright e2e (`tests/e2e/locales.smoke.spec.js`). Shared `src/lib/staticParams.js`.
+
+Scripts: `npm run test`, `npm run test:e2e`, `npm run test:all`.
+
+---
+
+### 24. ~~Junk file in vendor tree~~ ✅
+
+Removed `prb.txt` during vendor cleanup (#9).
+
+---
+
+*Re-run `npm run test:all` and `npm run build` after applying further changes.*
