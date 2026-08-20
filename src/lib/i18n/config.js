@@ -22,6 +22,18 @@ export function getSiteData(locale) {
   return siteDataByLocale[isValidLocale(locale) ? locale : defaultLocale];
 }
 
+export function getProjectBySlug(locale, slug) {
+  const id = parseInt(slug, 10);
+  if (Number.isNaN(id)) {
+    return null;
+  }
+
+  return (
+    getSiteData(locale).portfolioData.projects.find((item) => item.id === id) ??
+    null
+  );
+}
+
 export function switchLocalePath(pathname, targetLocale) {
   const segments = pathname.split('/').filter(Boolean);
   if (segments.length === 0) {

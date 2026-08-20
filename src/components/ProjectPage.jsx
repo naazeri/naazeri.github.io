@@ -1,16 +1,9 @@
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { getSiteData } from '@/lib/i18n/config';
-import sanitizeHtml from 'sanitize-html';
+import { sanitizedHtml } from '@/lib/sanitizeHtml';
 
-export default function ProjectPage({ locale, slug }) {
+export default function ProjectPage({ locale, project }) {
   const siteData = getSiteData(locale);
-  const project = siteData.portfolioData.projects.find(
-    (item) => item.id === parseInt(slug)
-  );
-
-  if (!project) {
-    return null;
-  }
 
   const categories = project.categories
     ?.map(
@@ -85,7 +78,7 @@ export default function ProjectPage({ locale, slug }) {
                   {project.url && (
                     <li>
                       <strong>{siteData.ui.projectUrl}</strong>:{' '}
-                      <a href={project.url} target="_blank">
+                      <a href={project.url} target="_blank" rel="noopener noreferrer">
                         {siteData.ui.view}
                       </a>
                     </li>
@@ -100,9 +93,9 @@ export default function ProjectPage({ locale, slug }) {
                 <h2>{project.title}</h2>
                 {project.description && (
                   <div
-                    dangerouslySetInnerHTML={{
-                      __html: sanitizeHtml(project.description),
-                    }}
+                    dangerouslySetInnerHTML={sanitizedHtml(
+                      project.description
+                    )}
                   />
                 )}
               </div>

@@ -4,19 +4,18 @@ import Script from 'next/script';
 import Link from 'next/link';
 import LanguageSelect from '@/components/LanguageSelect';
 import { getSiteData } from '@/lib/i18n/config';
+import { sanitizedHtml } from '@/lib/sanitizeHtml';
 import { useEffect } from 'react';
-import { mainScript } from '@/lib/utils';
+import { initLayoutScript, initPageScript } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 
 export default function LayoutComponent({ locale, children }) {
   const pathname = usePathname();
   const siteData = getSiteData(locale);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      mainScript();
-    }
-  }, [pathname]);
+  useEffect(() => initLayoutScript(), []);
+
+  useEffect(() => initPageScript(), [pathname]);
 
   return (
     <>
@@ -60,16 +59,16 @@ export default function LayoutComponent({ locale, children }) {
             <h3 className="sitename">{siteData.footerData.title}</h3>
 
             <p
-              dangerouslySetInnerHTML={{
-                __html: siteData.footerData.subtitle,
-              }}
+              dangerouslySetInnerHTML={sanitizedHtml(
+                siteData.footerData.subtitle
+              )}
             ></p>
 
             <div className="social-links d-flex justify-content-center">
               {siteData.aboutData.socials
                 .filter((social) => social.showInFooter)
                 .map((social, index) => (
-                  <a key={index} href={social.href} target="_blank">
+                  <a key={index} href={social.href} target="_blank" rel="noopener noreferrer">
                     <i className={`bi bi-${social.headIcon}`}></i>
                   </a>
                 ))}
@@ -78,15 +77,15 @@ export default function LayoutComponent({ locale, children }) {
             <div className="container">
               <div
                 className="copyright"
-                dangerouslySetInnerHTML={{
-                  __html: siteData.footerData.copyright,
-                }}
+                dangerouslySetInnerHTML={sanitizedHtml(
+                  siteData.footerData.copyright
+                )}
               ></div>
               <div
                 className="credits"
-                dangerouslySetInnerHTML={{
-                  __html: siteData.footerData.credits,
-                }}
+                dangerouslySetInnerHTML={sanitizedHtml(
+                  siteData.footerData.credits
+                )}
               ></div>
             </div>
           </div>

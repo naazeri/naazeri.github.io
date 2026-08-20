@@ -1,5 +1,6 @@
 import LottieAnimation from '@/components/LottieAnimation';
 import { getSiteData } from '@/lib/i18n/config';
+import { sanitizedHtml } from '@/lib/sanitizeHtml';
 import Link from 'next/link';
 
 export default function HomePage({ locale }) {
@@ -90,9 +91,9 @@ export default function HomePage({ locale }) {
             )}
             <h2>{siteData.aboutData.title1}</h2>
             <p
-              dangerouslySetInnerHTML={{
-                __html: siteData.aboutData.subtitle1,
-              }}
+              dangerouslySetInnerHTML={sanitizedHtml(
+                siteData.aboutData.subtitle1
+              )}
             ></p>
           </div>
 
@@ -112,9 +113,9 @@ export default function HomePage({ locale }) {
                 <h2>{siteData.aboutData.title2}</h2>
                 <p
                   className="py-2 my-0"
-                  dangerouslySetInnerHTML={{
-                    __html: siteData.aboutData.subtitle2,
-                  }}
+                  dangerouslySetInnerHTML={sanitizedHtml(
+                    siteData.aboutData.subtitle2
+                  )}
                 ></p>
 
                 <div className="row my-4">
@@ -127,7 +128,7 @@ export default function HomePage({ locale }) {
                         className={`about-head-icon bi bi-${social.headIcon}`}
                       ></i>
                       <strong className="mx-2">{social.label}:</strong>
-                      <a href={social.href} target="_blank">
+                      <a href={social.href} target="_blank" rel="noopener noreferrer">
                         {social.text}
                         <i
                           className={`about-tail-icon mx-1 bi bi-${
@@ -141,9 +142,9 @@ export default function HomePage({ locale }) {
 
                 <p
                   className="py-0 my-0"
-                  dangerouslySetInnerHTML={{
-                    __html: siteData.aboutData.description,
-                  }}
+                  dangerouslySetInnerHTML={sanitizedHtml(
+                    siteData.aboutData.description
+                  )}
                 ></p>
               </div>
             </div>

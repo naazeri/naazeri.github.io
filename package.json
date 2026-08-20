@@ -7,16 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:all": "npm run test && npm run test:e2e",
     "deploy": "next build && gh-pages -d out"
   },
   "dependencies": {
-    "@emotion/cache": "^11.14.0",
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
     "@lottiefiles/react-lottie-player": "^3.6.0",
-    "@mui/icons-material": "^7.0.1",
-    "@mui/material": "^7.0.1",
-    "@mui/material-nextjs": "^7.0.0",
     "next": "15.2.4",
     "postcss": "^8.5.3",
     "react": "^19.1.0",
@@ -25,13 +22,11 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.55.0",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
-    "gh-pages": "^6.3.0"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "sharp"
-    ]
+    "gh-pages": "^6.3.0",
+    "serve": "^14.2.4",
+    "vitest": "^3.2.4"
   }
 }
