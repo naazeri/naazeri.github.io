@@ -1,7 +1,8 @@
 export const faSiteData = {
   siteConfig: {
     title: 'Nazeriland | ناظری لند',
-    description: 'ناظری لند | ناظری لند | ناظری لند',
+    description:
+      'رضا ناظری — اتوماسیون هوش مصنوعی و سیستم‌های کسب‌وکار | رهبر فناوری عمل‌گرا | Odoo ERP',
     author: 'رضا ناظری',
     url: 'https://nazeriland.com',
     ui: {
@@ -29,7 +30,8 @@ export const faSiteData = {
   heroData: {
     anchorId: 'hero',
     title: 'رضا ناظری',
-    subtitle: 'برنامه نویس و مهندس نرم افزار',
+    subtitle:
+      'اتوماسیون هوش مصنوعی و سیستم‌های کسب‌وکار | رهبر فناوری عمل‌گرا | Odoo ERP',
   },
   aboutData: {
     anchorId: 'about',
@@ -37,7 +39,7 @@ export const faSiteData = {
     subtitle1: '',
     title2: 'من رضا ناظری هستم',
     subtitle2:
-      'مهندس نرم‌افزار و توسعه‌دهنده وب با بیش از 10 سال تجربه در ساخت وب سایت‌های مدرن، کاربر پسند و مقیاس پذیر.',
+      'من مهندسی نرم‌افزار و اتوماسیون هوش مصنوعی را ترکیب می‌کنم تا شیوه کار کسب‌وکارها را ساده‌تر کنم. تمرکز من بر اتصال سیستم‌ها، کاهش کارهای تکراری و تبدیل قابلیت‌های هوش مصنوعی به راهکارهای کاربردی است — بدون ایجاد پیچیدگی‌های غیرضروری.',
     description: '',
     image: '/assets/img/reza-nazeri.jpg',
     showImage: false,

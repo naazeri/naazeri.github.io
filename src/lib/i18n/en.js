@@ -1,7 +1,8 @@
 export const enSiteData = {
   siteConfig: {
     title: 'Nazeriland | Reza Nazeri',
-    description: 'Reza Nazeri — Software Engineer & Web Developer',
+    description:
+      'Reza Nazeri — AI Automation & Business Systems | Hands-on Technology Leader | Odoo ERP',
     author: 'Reza Nazeri',
     url: 'https://nazeriland.com',
     ui: {
@@ -29,7 +30,8 @@ export const enSiteData = {
   heroData: {
     anchorId: 'hero',
     title: 'Reza Nazeri',
-    subtitle: 'Software Engineer & Web Developer',
+    subtitle:
+      'AI Automation & Business Systems | Hands-on Technology Leader | Odoo ERP',
   },
   aboutData: {
     anchorId: 'about',
@@ -37,7 +39,7 @@ export const enSiteData = {
     subtitle1: '',
     title2: "I'm Reza Nazeri",
     subtitle2:
-      'Software engineer and web developer with over 10 years of experience building modern, user-friendly, and scalable websites.',
+      'I combine software engineering and AI automation to simplify how businesses work. My focus is on connecting systems, reducing repetitive work, and turning AI capabilities into practical solutions—without adding unnecessary complexity.',
     description: '',
     image: '/assets/img/reza-nazeri.jpg',
     showImage: false,
